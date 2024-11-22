@@ -46,9 +46,15 @@ it('should return one feedback by id', async () => {
 
   it('should create a feedback', async () => {
     const feedback = { userId: 1, rating: 5, comment: 'Great!' };
-    expect(await controller.create(feedback as Feedback)).toEqual({ id: 1, userId: 1, rating: 5, comment: 'Great!', createdAt: new Date() });
+    const result = await controller.create(feedback as Feedback);
+    expect(result).toEqual({
+      id: 1,
+      userId: 1,
+      rating: 5,
+      comment: 'Great!',
+      createdAt: expect.any(Date),
+    });
   });
-
   it('should update a feedback', async () => {
     const feedback = { rating: 4, comment: 'Good platform, but needs improvements.' };
     await controller.update(1, feedback);
